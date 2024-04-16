@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+</head>
+<body>
+
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading">Admin Dashboard</div>
+        <div class="list-group list-group-flush">
+            <a href="#dashboardSubmenu" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+            <div class="collapse" id="dashboardSubmenu">
+                <a href="{% url 'home' %}" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+               
+            </div> 
+            <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">User</a>
+            <div class="collapse" id="userSubmenu">
+                {% if request.user.accesslevel == 1 %}
+                <a href="{% url 'adduser' %}" class="list-group-item list-group-item-action bg-light">Add User</a>
+                {% endif %}
+                <a href="{% url 'viewuser' %}" class="list-group-item list-group-item-action bg-light">View Users</a>
+            </div>
+            <a href="#courseSubmenu" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Course</a>
+            <div class="collapse" id="courseSubmenu">
+                {% if request.user.accesslevel == 1 %}
+                <a href="{% url 'addcourse' %}" class="list-group-item list-group-item-action bg-light">Add unit/Course</a>
+                {% endif %}
+                <a href="{% url 'viewcourse' %}" class="list-group-item list-group-item-action bg-light">View Unit/Course</a>
+            </div>
+            <a href="#resultsSubmenu" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Results</a>
+            <div class="collapse" id="resultsSubmenu">
+                {% if request.user.accesslevel != 3 %}
+                <a href="{% url 'addresults' %}" class="list-group-item list-group-item-action bg-light">Add Results</a>
+                {% endif %}
+                <a href="{% url 'viewresults' %}" class="list-group-item list-group-item-action bg-light">View Results</a>
+            </div>
+            <a href="#reportsSubmenu" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Reports</a>
+            <div class="collapse" id="reportsSubmenu">
+                <a href="{% url 'report' %}" class="list-group-item list-group-item-action bg-light">Report</a>
+            </div>
+
+            <a href="#logout" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Logout</a>
+            <div class="collapse" id="logout">
+                <a href="{% url 'signout' %}" class="list-group-item list-group-item-action bg-light">Logout</a>
+            </div>
+           
+        </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+
+{% block mid_section %}
+
+{% endblock %}
+</div>
+<!-- /#wrapper -->
+
+<!-- Bootstrap and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- Bootstrap JavaScript -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<!-- Include Bootbox.js library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
+<script src="{% static 'js/script.js' %}"></script>
+
+
+</body>
+</html>

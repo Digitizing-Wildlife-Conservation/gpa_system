@@ -1,0 +1,53 @@
+{% extends 'layout/layout.html'%}
+{% load static %}
+{% block mid_section %}
+    <div class="container-fluid">
+        <h1 class="mt-4">Welcome to GPA {% if request.user.accesslevel == 1 %} Admin {% elif request.user.accesslevel == 2 %} Lecturer {% else %} Student {% endif %}portal  </h1>
+        {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+             {% endfor %}      
+<form method="post">
+    {% csrf_token %}
+
+    <label for="student">Student:</label>
+    <select id="student" class="form-control" placeholder="Select Student" name="student" data-course-url ="{% url 'studentunits' %}">
+        <option value="">Select student</option>
+        {% for student in students %}
+        <option value="{{ student.id }}">{{ student.firstname }} {{ student.last_name }}</option>
+        {% endfor %}
+        
+        
+    </select>
+
+    <br>
+   
+    <select id="unitnames" class="form-control" placeholder="Select unit" name="unitname" >
+        <option value="">Select unit</option>
+        
+        
+        
+    </select>
+    
+    <br>
+    <label for="lab">Lab(out of 30)</label>
+    <input type="number" class="form-control" name="lab" id="lab" min="0" max="30" oninput="validity.valid||(value='');">
+    <br>
+    <label for="quiz">Quiz(out of 20)</label>
+    <input type="number" class="form-control" name="quiz" id="quiz" min="0" max="20" oninput="validity.valid||(value='');">
+    <br>
+    <label for="endsem">End Sem(out of 20)</label>
+    <input type="number" class="form-control" name="endsem" id="endsem" min="0" max="20" oninput="validity.valid||(value='');">
+    <br>
+    <label for="midsem">Mid Sem(out of 30)</label>
+    <input type="number" class="form-control" name="midsem" id="midsem" min="0" max="30" oninput="validity.valid||(value='');">
+    <br>
+
+    <label for="total_score">Total Score:</label>
+    <input type="number" class="form-control" id="total_score" name="total_score" readonly>
+    <br>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

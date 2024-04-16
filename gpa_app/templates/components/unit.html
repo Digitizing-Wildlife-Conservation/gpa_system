@@ -1,0 +1,13 @@
+
+<label for="course">Course:</label>
+<select id="courseid" class="form-control" name="course_id" placeholder="Select Course" data-course-id="courseid">
+    {% for course in courses %}
+    <option value="{{ course.id }}" {% if course.id == request.POST.usercourse %} selected {% endif %}>{{ course.course_name }}</option>
+    
+    {% endfor %}
+</select>
+<br>
+<label for="Unit">Unit Name:</label>
+<input type="text" class="form-control" id="unit" name="unit" required>
+<br>
+<br>

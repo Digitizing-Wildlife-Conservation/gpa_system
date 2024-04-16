@@ -1,0 +1,44 @@
+{% for exam in exams %}
+<tr>
+    <td colspan="9">Remarks: {{ remarks }}</td>
+    
+</tr>
+<tr>
+    <td>{{ exam.unit_id.unit_name }}</td>
+    <td>{{ exam.student.user_id.firstname }} {{ exam.student.user_id.last_name }}</td>
+    <td>{{ exam.student.adm_no}}</td>
+    <td>{{ exam.midsem }}</td>
+    <td>{{ exam.endsem }}</td>
+    <td>{{ exam.lab }}</td>
+    <td>{{ exam.quiz }}</td>
+    <td>{{ exam.score }}</td>
+    {% if exam.score >= 90 %}
+    <td>4</td>
+    {% elif exam.score >= 80 %}
+    <td>3</td>
+    {% elif exam.score >= 70 %}
+    <td>2</tdf>
+    {% else %}
+    <td>1</td>
+    {% endif %}
+   
+
+</tr>
+{% endfor %}
+<tr>
+    <tr>
+        <td colspan="7">Total:</td>
+        <td>{{ scores }} average({{ average }})</td>
+        {% if average >= 90 %}
+        <td>4</th>
+        {% elif average >= 80 %}
+        <td>3</th>
+        {% elif average >= 70 %}
+        <td>2</th>
+        {% elif average == 0.0 %}
+        <td>0</th>
+        {% else %}
+        <td>1</th>
+        {% endif %}
+    </tr>
+</tr>
